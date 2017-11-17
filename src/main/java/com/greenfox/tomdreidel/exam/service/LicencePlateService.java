@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LicensePlateService {
+public class LicencePlateService {
 
   @Autowired
   PlateRepository plateRepository;
 
   public Iterable<LicencePlates> getPlates() {
     return plateRepository.findAll();
+  }
+
+  public Iterable<LicencePlates> searchBy(String string) {
+    return plateRepository.searchByString(string);
   }
 
 }

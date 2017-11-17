@@ -8,7 +8,7 @@
 <body>
 
 <form th:action="@{/search}" method="get">
-  <input th:value="q" type="text" placeholder="Enter plate number"/>
+  <input th:name="q" type="text" placeholder="Enter plate number"/>
   <button type="submit">Search</button>
 </form>
 
@@ -27,7 +27,7 @@
   <tr th:each="plate : ${resultSet}">
     <td th:text="${plate.getPlate()}"></td>
     <td th:text="${plate.getCarBrand()}"></td>
-    <td><a th:href="@{/plates/} + ${plate.getCarBrand()}" th:text="${plate.getCarModel()}"></a></td>
+    <td><a th:href="@{/search/} + ${plate.getCarBrand()}" th:text="${plate.getCarModel()}"></a></td>
     <td th:text="${plate.getColor()}"></td>
     <td th:text="${plate.getYear()}"></td>
   </tr>

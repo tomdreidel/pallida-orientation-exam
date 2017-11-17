@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>License Plate Search</title>
+</head>
+
+<body>
+
+<form th:action="@{/search}" method="get">
+  <input th:value="q" type="text" placeholder="Enter plate number"/>
+  <button type="submit">Search</button>
+</form>
+
+<button type="button" th:href="@{/search/police}">Police cars only</button>
+<button type="button" th:href="@{/search/diplomat}">Diplomats only</button>
+
+<table>
+  <colgroup span="5"></colgroup>
+  <tr>
+    <th>Licence plate</th>
+    <th>Brand</th>
+    <th>Model</th>
+    <th>Color</th>
+    <th>Year</th>
+  </tr>
+  <tr th:each="plate : ${resultSet}">
+    <td th:text="${plate.getPlate()}"></td>
+    <td th:text="${plate.getCarBrand()}"></td>
+    <td><a th:href="@{/plates/} + ${plate.getCarBrand()}" th:text="${plate.getCarModel()}"></a></td>
+    <td th:text="${plate.getColor()}"></td>
+    <td th:text="${plate.getYear()}"></td>
+  </tr>
+</table>
+
+</body>
+</html>

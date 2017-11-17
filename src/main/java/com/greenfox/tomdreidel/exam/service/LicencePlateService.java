@@ -1,9 +1,11 @@
 package com.greenfox.tomdreidel.exam.service;
 
+import com.greenfox.tomdreidel.exam.model.ApiResponse;
 import com.greenfox.tomdreidel.exam.model.LicencePlates;
 import com.greenfox.tomdreidel.exam.repository.PlateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class LicencePlateService {
@@ -27,5 +29,13 @@ public class LicencePlateService {
 
   public Iterable<LicencePlates> searchByBrand(String brand) {
     return plateRepository.searchByBrand(brand);
+  }
+
+  public ApiResponse apiRequestByBrand(String brand) {
+    ApiResponse result = new ApiResponse();
+    result.setResult("ok");
+    result.setData(plateRepository.searchByBrand(brand));
+    return result;
+
   }
 }

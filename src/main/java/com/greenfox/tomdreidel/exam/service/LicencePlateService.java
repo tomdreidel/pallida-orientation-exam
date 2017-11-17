@@ -3,9 +3,9 @@ package com.greenfox.tomdreidel.exam.service;
 import com.greenfox.tomdreidel.exam.model.ApiResponse;
 import com.greenfox.tomdreidel.exam.model.LicencePlates;
 import com.greenfox.tomdreidel.exam.repository.PlateRepository;
+import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public class LicencePlateService {
@@ -20,10 +20,14 @@ public class LicencePlateService {
   public Iterable<LicencePlates> searchBy(String string, int police, int diplomat) {
     if (police == 1) {
       return plateRepository.searchByStart("RB");
-    } else if (diplomat == 1) {
+    }
+
+    else if (diplomat == 1) {
       return plateRepository.searchByStart("DT");
-    } else {
-      return plateRepository.searchByString(string);
+    }
+
+    else {
+        return plateRepository.searchByString(string);
     }
   }
 
@@ -38,4 +42,13 @@ public class LicencePlateService {
     return result;
 
   }
+
+  public boolean validateInput(String input) {
+    Pattern pattern = Pattern.compile("^[A-Za-z0-9/s*]++$");
+    if (input.length() > 7 || !pattern.matcher(input).matches()) {
+      return false;
+    }
+    return true;
+  }
 }
+

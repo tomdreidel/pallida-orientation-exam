@@ -15,8 +15,17 @@ public class LicencePlateService {
     return plateRepository.findAll();
   }
 
-  public Iterable<LicencePlates> searchBy(String string) {
-    return plateRepository.searchByString(string);
+  public Iterable<LicencePlates> searchBy(String string, int police, int diplomat) {
+    if (police == 1) {
+      return plateRepository.searchByStart("RB");
+    } else if (diplomat == 1) {
+      return plateRepository.searchByStart("DT");
+    } else {
+      return plateRepository.searchByString(string);
+    }
   }
 
+  public Iterable<LicencePlates> searchByBrand(String brand) {
+    return plateRepository.searchByBrand(brand);
+  }
 }

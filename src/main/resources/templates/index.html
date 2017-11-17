@@ -12,8 +12,8 @@
   <button type="submit">Search</button>
 </form>
 
-<button type="button" th:href="@{/search/police}">Police cars only</button>
-<button type="button" th:href="@{/search/diplomat}">Diplomats only</button>
+<a th:href="@{/search?police=1}">Police cars only</a>
+<a th:href="@{/search?diplomat=1}">Diplomats only</a>
 
 <table>
   <colgroup span="5"></colgroup>
@@ -26,8 +26,8 @@
   </tr>
   <tr th:each="plate : ${resultSet}">
     <td th:text="${plate.getPlate()}"></td>
-    <td th:text="${plate.getCarBrand()}"></td>
-    <td><a th:href="@{/search/} + ${plate.getCarBrand()}" th:text="${plate.getCarModel()}"></a></td>
+    <td><a th:href="@{/search/} + ${plate.getCarBrand()}" th:text="${plate.getCarBrand()}"></a></td>
+    <td th:text="${plate.getCarModel()}"></td>
     <td th:text="${plate.getColor()}"></td>
     <td th:text="${plate.getYear()}"></td>
   </tr>
